@@ -1,0 +1,39 @@
+# Compiled Lua sources
+luac.out
+
+# Neovim
+.netrwhist
+**/doc/tags
+**/doc/tags-?
+
+# Plugin runtime files
+plugin/packer_compiled.lua
+
+# Generated directories and files
+.DS_Store
+.cache/
+target/
+logs/
+tmp/
+.undodir/
+
+# Node modules if using any JS tools
+node_modules/
+
+# Build artifacts
+*.o
+*.so
+*.dll
+*.dylib
+*.zip
+*.tar.gz
+
+# Local development files
+.env
+.envrc
+.direnv/
+
+# Test coverage
+coverage/
+.coverage
+.nyc_output/
