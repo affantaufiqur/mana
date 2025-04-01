@@ -5,7 +5,7 @@ local colors = {
 	gray_dark = "#4A4A4A",
 	gray = "#6B6B6B",
 	gray_light = "#8C8C8C",
-	base = "#ADADAD",
+	base = "#D0D0D0",
 	fg_alt = "#C9C9C9",
 	fg = "#EBEBEB",
 	highlight = "#F5F5F5",
@@ -31,7 +31,7 @@ local function set_highlights()
 
 	vim.api.nvim_set_hl(0, "@comment", { fg = colors.gray })
 	vim.api.nvim_set_hl(0, "@operator", { fg = colors.gray_light })
-	vim.api.nvim_set_hl(0, "@punctuation", { fg = colors.gray_dark })
+	vim.api.nvim_set_hl(0, "@punctuation", { fg = colors.fg })
 	vim.api.nvim_set_hl(0, "@conditional", { fg = colors.fg_alt })
 	vim.api.nvim_set_hl(0, "@repeat", { fg = colors.fg_alt })
 	vim.api.nvim_set_hl(0, "@exception", { fg = colors.fg_alt })
@@ -55,6 +55,14 @@ local function set_highlights()
 	vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = colors.warn })
 	vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = colors.info })
 	vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = colors.hint })
+
+	vim.api.nvim_set_hl(0, "@markup.quote", { fg = colors.fg })
+
+	vim.api.nvim_set_hl(0, "Delimiter", { fg = colors.fg })
+	vim.api.nvim_set_hl(0, "Bracket", { fg = colors.fg, nocombine = true })
+
+	vim.api.nvim_set_hl(0, "Special", { fg = colors.fg })
+	vim.api.nvim_set_hl(0, "SpecialChar", { fg = colors.fg })
 end
 
 local M = {}
