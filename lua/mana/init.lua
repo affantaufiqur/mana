@@ -183,7 +183,7 @@ end
 
 local M = {}
 local config = {
-	transparent = true,
+	transparent = false,
 }
 
 function M.load()
