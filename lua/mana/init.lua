@@ -25,18 +25,25 @@ local function hl(group, opts)
 	vim.api.nvim_set_hl(0, group, opts)
 end
 
-local function set_highlights()
+local function set_highlights(opts)
 	vim.cmd.hi("clear")
 	if vim.fn.exists("syntax_on") then
 		vim.cmd.syntax("reset")
 	end
 	vim.g.colors_name = "mana"
 
-	hl("Normal", { fg = colors.fg, bg = colors.bg })
+	local transparent = opts and opts.transparent or false
+	if not transparent then
+		hl("Normal", { fg = colors.fg, bg = colors.bg })
+		hl("SignColumn", { fg = colors.gray_dark, bg = colors.bg })
+	else
+		hl("Normal", { fg = colors.fg, bg = "NONE" })
+		hl("SignColumn", { fg = colors.gray_dark, bg = "NONE" })
+	end
+
 	hl("CursorLine", { bg = colors.bg_alt })
 	hl("CursorLineNr", { fg = colors.highlight, bg = colors.bg_alt, bold = true })
 	hl("LineNr", { fg = colors.gray })
-	hl("SignColumn", { fg = colors.gray_dark, bg = colors.bg })
 	hl("Folded", { fg = colors.gray, bg = colors.gray_darker, italic = true })
 	hl("Visual", { bg = colors.gray_dark })
 	hl("Search", { fg = colors.bg, bg = colors.base, bold = true })
@@ -171,10 +178,18 @@ local function set_highlights()
 	-- Fallback / Generic
 	hl("Delimiter", { fg = colors.gray_light })
 	hl("Special", { fg = colors.base })
-	hl("SpecialKey", { fg = colors.gray_dark }) -- Unprintable characters in listchars
+	hl("SpecialKey", { fg = colors.gray_dark })
 end
 
 local M = {}
+local config = {
+	transparent = true,
+}
+
+function M.load()
+	vim.g.colors_name = "mana"
+	set_highlights(config)
+end
 
 function M.setup(opts)
 	opts = opts or {}
@@ -185,13 +200,14 @@ function M.setup(opts)
 		end
 	end
 
+	if opts.transparent ~= nil then
+		config.transparent = opts.transparent
+	end
+
+	M.load()
+
 	return M
 end
 
-function M.load()
-	vim.g.colors_name = "mana"
-	set_highlights()
-end
-
-M.load()
+-- M.load()
 return M
